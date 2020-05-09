@@ -20,18 +20,14 @@ public class FlutterflappytoastPlugin implements FlutterPlugin, MethodCallHandle
     //吐司
     private Toast toast;
 
-
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-
         //附加到引擎
         final MethodChannel channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "flutterflappytoast");
-
-        FlutterflappytoastPlugin plugin = new FlutterflappytoastPlugin();
-        //创建吐司
-        plugin.toast = Toast.makeText(flutterPluginBinding.getApplicationContext(), "", Toast.LENGTH_SHORT);
+        //创建toast
+        toast = Toast.makeText(flutterPluginBinding.getApplicationContext(), "", Toast.LENGTH_SHORT);
         //设置handler
-        channel.setMethodCallHandler(plugin);
+        channel.setMethodCallHandler(this);
     }
 
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
@@ -44,6 +40,7 @@ public class FlutterflappytoastPlugin implements FlutterPlugin, MethodCallHandle
     // depending on the user's project. onAttachedToEngine or registerWith must both be defined
     // in the same class.
     public static void registerWith(Registrar registrar) {
+        //toast
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "flutterflappytoast");
         //控件
         FlutterflappytoastPlugin plugin = new FlutterflappytoastPlugin();
