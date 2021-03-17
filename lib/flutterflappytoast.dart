@@ -10,11 +10,10 @@ enum ToastGravity {
 
 class Flutterflappytoast {
   //channel
-  static const MethodChannel _channel =
-      const MethodChannel('flutterflappytoast');
+  static const MethodChannel _channel = const MethodChannel('flutterflappytoast');
 
   //显示吐司
-  static Future<String> showToast(String toast, ToastGravity gravity) async {
+  static Future<void> showToast(String toast, ToastGravity gravity) async {
     int gravityInt = 0;
     if (gravity == ToastGravity.BOTTOM) {
       gravityInt = 0;
@@ -25,9 +24,6 @@ class Flutterflappytoast {
     if (gravity == ToastGravity.TOP) {
       gravityInt = 2;
     }
-    //返回视频的地址
-    final String flag = await _channel.invokeMethod(
-        'showToast', {"toast": toast, "gravity": gravityInt.toString()});
-    return flag;
+    await _channel.invokeMethod('showToast', {"toast": toast, "gravity": gravityInt.toString()});
   }
 }
